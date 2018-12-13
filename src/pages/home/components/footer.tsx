@@ -12,7 +12,11 @@ export default class Footer extends React.Component<Props> {
   render (): React.ReactNode {
     return (
       <View style={styles.container}>
-        <Text>footer</Text>
+        <View style={styles.buttonView}>
+          <Text style={styles.buttonText}>
+            ISSUE CHALLENGE >
+          </Text>
+        </View>
       </View>
     );
   }
@@ -21,6 +25,22 @@ export default class Footer extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    height: 46
+    height: 86,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopColor: '#929292',
+    borderTopWidth: 1,
+  },
+  buttonView: {
+    backgroundColor: '#F07D22',
+    padding: 10,
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: '#FFFFFF'
   }
 });

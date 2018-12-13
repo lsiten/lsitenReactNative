@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "antd-mobile-rn": "^2.3.2",
     "react": "16.6.1",
     "react-native": "0.57.7"
   },
