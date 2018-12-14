@@ -10,6 +10,8 @@ import {
   Modal
 } from 'react-native';
 
+import Stepper from '../../../components/Stepper';
+
 type Props = {};
 
 export default class MyTable extends React.Component<Props> {
@@ -17,7 +19,9 @@ export default class MyTable extends React.Component<Props> {
     super(props);
     this.state = {
       isShowModel: false,
-      transparent: true
+      transparent: true,
+      stepValue1: 5,
+      stepValue2: 5
     };
   }
   state: any
@@ -30,6 +34,16 @@ export default class MyTable extends React.Component<Props> {
     this.setState({
       isShowModel: false
     })
+  }
+  stepChange (value:any) {
+    this.setState({
+      stepValue1: value
+    });
+  }
+  stepChange2 (value:any) {
+    this.setState({
+      stepValue2: value
+    });
   }
   search () {}
   render (): React.ReactNode {
@@ -186,7 +200,7 @@ export default class MyTable extends React.Component<Props> {
           <View style={styles.modalMask}>
             <View style={styles.modalBody}>
               <View style={styles.modalHeader}>
-                <Text style={styles.modelClose}>×</Text>
+                <Text style={styles.modelClose} onPress={() => {this.closeModel()}}>×</Text>
                 <Text style={styles.modalHeaderText}>CHALLENG ADDITIONAL PLAYERS</Text>
               </View>
               <View style={styles.modalContent}>
@@ -198,12 +212,61 @@ export default class MyTable extends React.Component<Props> {
                   />
                   <Image source={require('../../../asset/img/search.png')} style={styles.modalContentSearchImage}/>
                 </View>
-                <View style={styles.modalContentTable}>
-                  <View style={styles.modalContentTableRow}>
-                    <View style={styles.modalContentTableCol}></View>
-                    <View style={styles.modalContentTableCol}></View>
+
+                  <View style={styles.modalContentTable}>
+                      <View style={[styles.modalContentTableRow, {marginTop: 10, borderBottomColor: '#FFFFFF', borderBottomWidth: 1,paddingBottom: 10}]}>
+                          <View style={Object.assign({}, styles.modalContentTableCol, styles.tableColRow, {paddingLeft: 20,})}>
+                              <Text style={Object.assign({}, styles.tableColText, styles.tableColCiryle, styles.tableColBlue)}>
+                                LJ
+                              </Text>
+                              <Text style={Object.assign({}, styles.tableColText, {
+                                lineHeight: 30,
+                                textAlign: 'center',
+                                marginLeft: 5,
+                              })}>
+                                Luxi J
+                              </Text>
+                          </View>
+                          <View style={styles.modalContentTableCol}>
+                            <Stepper
+                              value={this.state.stepValue1}
+                              onChange={key => {
+                                this.stepChange(key)
+                              }}
+                            ></Stepper>
+                          </View>
+                      </View>
                   </View>
-                </View>
+
+                  <View style={styles.modalContentTable}>
+                      <View style={[styles.modalContentTableRow, {marginTop: 10,paddingBottom: 10}]}>
+                          <View style={Object.assign({}, styles.modalContentTableCol, styles.tableColRow, {paddingLeft: 20,})}>
+                              <Text style={Object.assign({}, styles.tableColText, styles.tableColCiryle, styles.tableColGreen)}>
+                                BZ
+                              </Text>
+                              <Text style={Object.assign({}, styles.tableColText, {
+                                lineHeight: 30,
+                                textAlign: 'center',
+                                marginLeft: 5,
+                              })}>
+                                Bin Zhang
+                              </Text>
+                          </View>
+                          <View style={styles.modalContentTableCol}>
+                            <Stepper
+                              value={this.state.stepValue2}
+                              onChange={key => {
+                                this.stepChange2(key)
+                              }}
+                            ></Stepper>
+                          </View>
+                      </View>
+                  </View>
+              </View>
+
+
+              <View style={styles.modelFooter}>
+                <Text style={styles.modelFooterButton}>NEXT ></Text>
               </View>
             </View>
           </View>
@@ -227,7 +290,7 @@ const styles = StyleSheet.create({
     padding: 10
   },
   modalBody: {
-    height: '50%',
+    height: 280,
     width: '100%',
     backgroundColor: 'rgba(255,255,255,0.6)',
     borderColor: '#ffffff',
@@ -262,12 +325,18 @@ const styles = StyleSheet.create({
   },
   modalContentSearchInput: {
     backgroundColor: '#FFFFFF',
-    height: 40,
-    fontSize: 14
+    height: 30,
+    paddingTop: 3,
+    paddingLeft: 10,
+    paddingBottom: 3,
+    paddingRight: 10,
+    margin: 0,
+    fontSize: 12,
+    width: 200
   },
   modalContentSearchImage: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     margin: 0,
     backgroundColor: '#585757',
   },
@@ -276,11 +345,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   modalContentTableCol: {},
+
+  modelFooter: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+
+  modelFooterButton: {
+    color: '#FFFFFF',
+    lineHeight: 30,
+    fontWeight: 'bold',
+    width: 200,
+    textAlign: 'center',
+    backgroundColor: '#6EAF3F',
+  },
+
   tableHeader: {
+    alignItems: 'center',
     backgroundColor: '#3F3F3F',
     height: 40,
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'center',
   },
   tableCol: {
